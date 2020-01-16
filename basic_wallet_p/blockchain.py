@@ -125,25 +125,6 @@ node_identifier = str(uuid4()).replace('-', '')
 blockchain = Blockchain()
 
 
-@app.route('/transactions/new', methods=['POST'])
-def new_transaction_endpoint:
-    data = request.get_json()
-
-    required = ['sender', 'recipient', 'amount']
-    if not all(k in data for k in required):
-        response = {'message': 'Missing values'}
-        return jsonify(response), 400
-
-    # Create a new transaction
-    index = blockchain.new_transaction(sender=data['sender'], 
-                                recipient=data['recipient'], 
-                                amount=data['amount'])
-
-    response = {'message': f'Transaction Successful. Posted to {index}'}
-
-    return jsonify(response), 201
-
-
 @app.route('/mine', methods=['POST'])
 def mine():
     # Get data
